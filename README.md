@@ -6,6 +6,7 @@
 
 - [Projects](./projects)
   - [Project 1](./projects/project1): Regression analysis and resampling on the Runge function (OLS, Ridge and Lasso, gradient descent and SGD, bootstrap, cross-validation)
+  - [Project 2](./projects/project2): Classification and Regression, from Linear and Logistic Regression to Neural Networks. 
   
 - [Weekly Exercises](./weekly_Exercises)
 
