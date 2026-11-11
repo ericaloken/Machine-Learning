@@ -1,0 +1,239 @@
+No tasks specified. Running all tasks.
+Saved: figures/ols_mse_r2_vs_degree_different_n.pdf
+Saved: figures/ols_mse_r2_vs_degree_different_sigma.pdf
+Saved: figures/ols_parameters_vs_degree.pdf
+Saved: figures/ols_fits_over_degree.pdf
+Saved: figures/ridge_parameters_vs_lambda.pdf
+Saved: figures/ridge_parameters_vs_degree.pdf
+Saved: figures/ridge_mse_r2_vs_degree_different_lambda.pdf
+Saved: figures/ridge_mse_r2_vs_lambda_degree_15.pdf
+Saved: figures/ridge_shrinkage_factors_degree_15.pdf
+Saved: figures/train_test_mse_vs_degree.pdf
+Saved: figures/ols_bias_variance_vs_degree_both.pdf
+Saved: figures/ols_bias_variance_vs_degree_different_n_bootstrap.pdf
+Saved: figures/ols_noise_floor_vs_degree.pdf
+Saved: figures/ols_cv_mse_degree_k_comparison.pdf
+Saved: figures/ridge_cv_mse_lambda_k_comparison.pdf
+Saved: figures/ridge_cv_mse_degree_k_comparison.pdf
+Saved: figures/ols_cv_bootstrap_vs_degree.pdf
+Saved: figures/ridge_cv_bootstrap_vs_degree.pdf
+
+OLS gradient descent
+-----------------------------------------------------
+gamma_factor                        = 0.80
+gamma = gamma_factor * gamma_max    = 2.841999e-01
+gamma_optimal                       = 3.547934e-01
+gamma_max                           = 3.552499e-01
+kappa                               = 7.772165e+02
+
+Gradient       Iterations    Relative error
+Analytical     5948    1.438198e-06
+AD             5948    1.438198e-06
+
+Learning-rate study
+gamma/gamma_max    Iterations    Relative error
+           0.01    10000    2.494590e-01
+           0.10    10000    2.308911e-02
+           0.30    10000    1.340074e-04
+           0.50    9154    2.305326e-06
+           0.70    6724    1.645216e-06
+           0.90    5337    1.279074e-06
+           0.99    4889    1.161668e-06
+           1.01    10000    2.288930e+83
+
+RIDGE gradient descent
+-----------------------------------------------------
+gamma_factor                        = 0.80
+gamma = gamma_factor * gamma_max    = 2.831939e-01
+gamma_optimal                       = 3.522936e-01
+gamma_max                           = 3.539924e-01
+kappa                               = 2.073823e+02
+
+Gradient       Iterations    Relative error
+Analytical     1583    5.120889e-07
+AD             1583    5.120889e-07
+
+Learning-rate study
+gamma/gamma_max    Iterations    Relative error
+           0.01    10000    6.056620e-02
+           0.10    10000    6.976971e-06
+           0.30    3891    1.373698e-06
+           0.50    2439    8.203354e-07
+           0.70    1790    5.864649e-07
+           0.90    1420    4.549489e-07
+           0.99    1301    4.107414e-07
+           1.01    10000    3.064235e+83
+
+OLS: optimizers (target relative error 1e-03, max 10000 iterations, gamma_max = 0.355)
+-----------------------------------------------------------------------------
+Optimizer    best lr  iterations  final error   lr range reaching target
+GD           3.0e-01        2626     1.08e-10   1e-01, 3e-01            
+momentum     3.0e-01         203     8.38e-16   1e-02, 3e-02, 1e-01, 3e-01
+adagrad      3.0e-01        4466     8.73e-07   1e-01, 3e-01, 1e+00, 3e+00, 1e+01
+rmsprop      1.0e-03        4386     3.64e-04   1e-03                   
+adam         3.0e-03        3791     1.52e-05   1e-03, 3e-03, 1e-02, 3e-02, 1e-01, 3e-01, 1e+00
+
+OLS: iterations to reach relative error 1e-03
+Optimizer    0.001   0.003    0.01    0.03     0.1     0.3       1       3      10
+GD               -       -       -       -    7884    2626    div.    div.    div.
+momentum         -       -    7841    2582     740     203    div.    div.    div.
+adagrad          -       -       -       -    4936    4466    4473    4497    4507
+rmsprop       4386       -       -       -       -       -       -       -       -
+adam          7350    3791    9782    9998    9930    9945    9999       -       -
+Saved: figures/ols_iterations_to_target_vs_learning_rate.pdf
+Saved: figures/ols_final_error_vs_learning_rate.pdf
+Saved: figures/ols_convergence_optimizers.pdf
+
+RIDGE: optimizers (target relative error 1e-03, max 10000 iterations, gamma_max = 0.354)
+-----------------------------------------------------------------------------
+Optimizer    best lr  iterations  final error   lr range reaching target
+GD           3.0e-01         570     2.59e-15   3e-02, 1e-01, 3e-01     
+momentum     3.0e-01         125     6.50e-16   3e-03, 1e-02, 3e-02, 1e-01, 3e-01
+adagrad      1.0e+00         935     2.14e-15   1e-01, 3e-01, 1e+00, 3e+00, 1e+01
+rmsprop      1.0e-03        2301     4.89e-04   1e-03                   
+adam         3.0e-03        3288     4.23e-05   1e-03, 3e-03, 1e-02, 3e-02, 1e-01
+
+RIDGE: iterations to reach relative error 1e-03
+Optimizer    0.001   0.003    0.01    0.03     0.1     0.3       1       3      10
+GD               -       -       -    5728    1716     570    div.    div.    div.
+momentum         -    5694    1682     534     132     125    div.    div.    div.
+adagrad          -       -       -       -    1867     954     935     947     954
+rmsprop       2301       -       -       -       -       -       -       -       -
+adam          6536    3288    9914    9980    9929       -       -       -       -
+Saved: figures/ridge_iterations_to_target_vs_learning_rate.pdf
+Saved: figures/ridge_final_error_vs_learning_rate.pdf
+Saved: figures/ridge_convergence_optimizers.pdf
+Saved: figures/ols_ridge_iterations_to_target_vs_learning_rate.pdf
+-----------------------------------------------------------
+CV comparison: ols, k=5
+Implementation:              MSE:           Std:
+Own                    0.01284353     0.00140055
+Scikit-learn           0.01284353     0.00140055
+Difference              0.000e+00      0.000e+00
+
+-----------------------------------------------------------
+CV comparison: ridge, k=5
+Implementation:              MSE:           Std:
+Own                    0.01573962     0.00096578
+Scikit-learn           0.01573962     0.00096578
+Difference              0.000e+00      0.000e+00
+
+OLS:    max |AD - analytic| = 8.881784197001252e-16
+Ridge:  max |AD - analytic| = 8.881784197001252e-16
+
+Lasso: the non-differentiable point |theta| = 0
+-----------------------------------------------------
+jax.grad(jnp.abs)(0.0)                   = 1.0
+max|analytic - AD| gradient at theta = 0 = 1.250e-02   (lmbda/n = 1.250e-02)
+max|analytic - AD| gradient at random    = 1.332e-15
+GD, analytic subgradient: rel. error to Scikit-Learn = 4.101e-03
+GD, AD subgradient:       rel. error to Scikit-Learn = 4.076e-03
+GD analytic vs GD AD:     rel. difference            = 1.607e-03
+
+Lasso over lambda (degree 5), own GD vs Scikit-Learn
+-----------------------------------------------------------------------------
+    lambda  sklearn alpha    MSE own  MSE sklearn  nonzero sklearn  max|dtheta|
+  1.00e-03       6.25e-06    0.01964      0.01964                5     2.45e-06
+  3.16e-03       1.98e-05    0.01965      0.01965                5     7.75e-06
+  1.00e-02       6.25e-05    0.01969      0.01969                5     2.45e-05
+  3.16e-02       1.98e-04    0.01969      0.01969                4     8.23e-05
+  1.00e-01       6.25e-04    0.01955      0.01956                4     2.45e-04
+  3.16e-01       1.98e-03    0.01914      0.01919                3     3.32e-03
+  1.00e+00       6.25e-03    0.01817      0.01833                3     8.43e-03
+  3.16e+00       1.98e-02    0.01671      0.01691                2     4.42e-02
+  1.00e+01       6.25e-02    0.02884      0.02567                2     1.52e-01
+  3.16e+01       1.98e-01    0.08982      0.03370                1     5.72e-01
+  1.00e+02       6.25e-01    0.66996      0.06921                1     1.60e+00
+Saved: figures/lasso_mse_r2_vs_lambda_degree_5.pdf
+Saved: figures/lasso_parameters_vs_lambda.pdf
+Saved: figures/lasso_sklearn_parameters_vs_lambda.pdf
+
+Lasso optimizers (degree 5, lambda = 1.0, target rel. error 1e-03, max 10000 iterations), reference: Scikit-Learn
+-----------------------------------------------------------------------------
+Optimizer    best lr  final error    cost gap  iter. to target   lr range reaching target
+GD           3.0e-02     1.90e-04    6.69e-06             3328   1e-02, 3e-02, 1e-01     
+momentum     3.0e-03     4.45e-05    6.95e-07             3259   1e-03, 3e-03, 1e-02, 3e-02, 1e-01
+adagrad      1.0e-01     3.19e-04    7.34e-06             3289   1e-01, 3e-01            
+rmsprop      1.0e-03     6.96e-04    1.48e-05             2536   1e-03                   
+adam         1.0e-03     2.59e-04    6.47e-06             7022   1e-03, 3e-03            
+Saved: figures/lasso_iterations_to_target_vs_learning_rate.pdf
+Saved: figures/lasso_final_error_vs_learning_rate.pdf
+Saved: figures/lasso_convergence_optimizers.pdf
+
+OLS, Ridge and Lasso (degree 5, lambda = 1.0)
+-----------------------------------------------------------------------------
+Model                    test MSE   |theta_j| < 1e-3   coefficients (theta_1, ...)
+OLS (closed form)         0.01963                  0     0.034  -2.618  -0.045   2.033   0.026
+OLS (GD)                  0.01963                  0     0.034  -2.618  -0.045   2.033   0.026
+Ridge (closed form)       0.01714                  0     0.011  -1.996   0.032   1.416  -0.037
+Ridge (GD)                0.01714                  0     0.011  -1.996   0.032   1.416  -0.037
+Lasso (Scikit-Learn)      0.01833                  2     0.007  -2.435   0.000   1.852   0.000
+Lasso (GD)                0.01817                  0     0.015  -2.434   0.008   1.853   0.004
+Saved: figures/ols_ridge_lasso_coefficients.pdf
+
+OLS: SGD, relative error to closed form after 1000 epochs
+-----------------------------------------------------------------------------
+Optimizer         M=1        M=5       M=10       M=20       M=50       full
+GD           diverged   3.57e-02   2.08e-02   1.42e-02   7.14e-02   1.47e-01
+momentum     diverged   3.60e-01   3.30e-02   9.45e-03   4.29e-03   3.36e-02
+adagrad      9.06e-03   1.06e-02   1.18e-02   1.38e-02   4.21e-02   8.00e-02
+rmsprop      4.96e-02   8.51e-02   1.35e-01   1.70e-01   2.06e-01   1.13e-01
+adam         3.62e-02   1.26e-02   8.43e-03   6.54e-03   3.95e-03   6.02e-09
+time [s]         1.83       0.37       0.19       0.10       0.04       0.02   (mean over optimizers)
+Saved: figures/ols_sgd_error_vs_batch_size.pdf
+Saved: figures/ols_sgd_error_vs_epoch_sgd_vs_full_M10.pdf
+Saved: figures/ols_sgd_error_vs_epoch_schedule_M10.pdf
+
+OLS: SGD (M = 10) vs full batch, 1000 epochs, target relative error 1e-03
+------------------------------------------------------------------------------------------------------------
+Optimizer                         final error     epochs to target    time/epoch [ms]    time to target [ms]
+                 full        SGD    SGD+decay      full       SGD      full      SGD        full        SGD
+GD           1.47e-01   2.08e-02     5.34e-02         -         -     0.017    0.192           -          -
+momentum     3.36e-02   3.30e-02     4.11e-03         -         -     0.017    0.193           -          -
+adagrad      8.00e-02   1.18e-02     8.83e-02         -         -     0.017    0.191           -          -
+rmsprop      1.13e-01   1.35e-01     3.72e-01         -         -     0.017    0.192           -          -
+adam         6.02e-09   8.43e-03     4.45e-02       589         -     0.017    0.193        10.2          -
+
+RIDGE: SGD, relative error to closed form after 1000 epochs
+-----------------------------------------------------------------------------
+Optimizer         M=1        M=5       M=10       M=20       M=50       full
+GD           diverged   5.48e-02   2.22e-02   8.30e-03   2.82e-03   7.07e-03
+momentum     diverged   5.76e-01   3.55e-02   1.50e-02   2.16e-03   1.57e-05
+adagrad      3.98e-03   3.70e-03   3.89e-03   3.69e-03   5.12e-03   7.38e-04
+rmsprop      8.91e-02   1.30e-02   7.21e-03   1.18e-02   2.60e-02   2.02e-03
+adam         5.43e-02   1.77e-02   1.07e-02   8.69e-03   2.05e-03   4.55e-16
+time [s]         1.98       0.41       0.21       0.11       0.05       0.02   (mean over optimizers)
+Saved: figures/ridge_sgd_error_vs_batch_size.pdf
+Saved: figures/ridge_sgd_error_vs_epoch_sgd_vs_full_M10.pdf
+Saved: figures/ridge_sgd_error_vs_epoch_schedule_M10.pdf
+
+RIDGE: SGD (M = 10) vs full batch, 1000 epochs, target relative error 1e-03
+------------------------------------------------------------------------------------------------------------
+Optimizer                         final error     epochs to target    time/epoch [ms]    time to target [ms]
+                 full        SGD    SGD+decay      full       SGD      full      SGD        full        SGD
+GD           7.07e-03   2.22e-02     6.70e-04         -         -     0.019    0.206           -          -
+momentum     1.57e-05   3.55e-02     3.37e-03       534         -     0.019    0.209        10.0          -
+adagrad      7.38e-04   3.89e-03     4.47e-04       935         -     0.019    0.206        17.7          -
+rmsprop      2.02e-03   7.21e-03     2.02e-01         -         -     0.019    0.208           -          -
+adam         4.55e-16   1.07e-02     1.21e-03       429         -     0.019    0.208         8.1          -
+
+Final model selection, 5-fold cross-validation on the training part (n_train = 400, n_test = 100, noise variance 0.01)
+------------------------------------------------------------------------------
+Method                  degree     lambda     CV MSE  std (folds)   test MSE
+OLS                         15          -    0.01188      0.00140    0.01289
+Ridge                       16      1e-08    0.01186      0.00139    0.01266
+Lasso (own GD)              10      1e-04    0.01743      0.00176    0.01903
+Lasso (Sk-Learn)            10      1e-04    0.01348      0.00122    0.01527
+Lowest CV MSE: Ridge
+Saved: figures/model_selection_cv_mse_vs_degree_k5.pdf
+Saved: figures/ridge_cv_heatmap_k5.pdf
+Saved: figures/lasso_cv_heatmap_k5.pdf
+
+Bias-variance decomposition (bootstrap, 50 samples, bias relative to the true function)
+-----------------------------------------------------------------------------
+Method                  degree     lambda     bias^2   variance   test MSE
+OLS                         10          -    0.00193    0.00043    0.01537
+Ridge                       10      1e-06    0.00193    0.00043    0.01536
+Lasso (own GD)              10      1e-04    0.00585    0.00039    0.01972
+OLS                         25          -    0.01366    0.00752    0.03348
+Ridge                       25      1e-06    0.00112    0.00119    0.01480

@@ -1,0 +1,90 @@
+# config.toml
+
+[data] #  for all tasks
+seed = 67              # random seed
+n_points = 100         # standard number of points in the interval
+sigma = 0.1            # std for noise of data
+x_sampling = "uniform" # uniform or linspace
+test_size = 0.2        # proportion of test data
+
+
+[ols] # for OLS (task a)
+max_degree = 15              # number of polynomial degrees to test
+n_vals = [50, 100, 500]      # number of data points to test
+sigma_vals = [0.0, 0.1, 0.2] # array of noise std values for testing
+fit_n_vals = [50, 500]     # data set sizes in the figure of fitted curves
+fit_degrees = [2, 8, 20]   # polynomial degrees in the figure of fitted curves
+
+
+[ridge] # for Ridge (task b)
+degree = 15                                          # for lambda sweep 
+lambda_test_log = { start = -8, stop = 4, num = 13 } # log10 of lambda values to test
+lmbda = 0.01                                         # base lambda for degree sweep
+lambda_vals = [1e-4, 1e-2, 1.0, 100.0]               # lambdas for degree sweep
+max_degree = 15                                      # number of polynomial degrees to test
+
+
+[bootstrap] # for bootstrap (task c)
+n_points = 500          # default number of data points to use for bootstrap
+n_vals = [50, 100, 500] # number of data points to test
+max_degree = 30         # number of polynomial degrees to test
+n_bootstrap = 100       # number of bootstrap resamples
+linreg_method = "ols"   # method to use for bootstrap (ols or ridge)
+
+
+[cv] # for cross validation (task d)
+n_points = 500                                             # must match [bootstrap] n_points
+max_degree = 30
+k_vals = [5, 10]
+ridge_degree = 15                                          # fixed degree for the lambda sweep
+ridge_lambda = 0.01                                        # fixed lambda for the degree sweep
+ridge_lambda_test_log = { start = -8, stop = 4, num = 13 } # exponents, 1e-8 to 1e4
+verify_degree = 10                                         # any degree works for the check
+verify_k = 5
+
+[gd]
+degree = 5                                        # degree of regression model
+lmbda = 1.0                                      # regularization parameter of Ridge
+max_iter = 10000                                  # maximum number of iterations
+tol = 1e-8                                        # convergence criterion
+gamma_factor = 0.8                                # fraction of the max learning rate (gamma = factor*gamma_max), between 0 and 1
+gamma_factors = [0.01, 0.1, 0.3, 0.5, 0.7, 0.9, 0.99, 1.01] # learning rate factors (just an  example)
+
+
+[lasso] # for Lasso (task g)
+degree = 5                                            # polynomial degree (same as [gd], so GD can converge)
+lmbda = 1.0                                           # our convention; Scikit-Learn alpha = lmbda / (2 n_train)
+lambda_test_log = { start = -3, stop = 2, num = 11 }  # log10 of lambda values for the lambda sweep
+gamma_factor = 0.8                                    # plain GD: gamma = gamma_factor * gamma_max
+max_iter = 10000                                      # same iteration budget for every optimizer
+tol = 0.0                                             # 0: never stop early (fixed-step subgradient methods never meet a tol anyway)
+learning_rates = [0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1.0, 3.0, 10.0] # same learning rates for all optimizers
+target_error = 1e-3        
+
+[adaptive_gd] # for momentum, AdaGrad, RMSProp and Adam (task f); data, degree and lmbda come from [gd]
+learning_rates = [0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1.0, 3.0, 10.0] # same learning rates for all optimizers
+max_iter = 10000      # same iteration budget for every optimizer
+tol = 0.0             # 0: never stop early, so every run records max_iter errors
+target_error = 1e-3   # accuracy to reach (relative error to the closed-form solution)
+epsilon = 1e-8        # numerical stability for AdaGrad, RMSProp and Adam
+momentum_beta = 0.9   # momentum parameter
+rmsprop_beta = 0.9    # RMSProp decay rate (rho)
+adam_beta1 = 0.9      # Adam first-moment decay
+adam_beta2 = 0.999    # Adam second-moment decay
+
+[sgd] # for stochastic gradient descent (task h). Data, degree and lmbda from [gd], optimizer parameters from [adaptive_gd]
+n_epochs = 1000                   # number of epochs (passes through the data) in every run
+batch_sizes = [1, 5, 10, 20, 50]  # mini-batch sizes to test; full batch (no SGD) is added for comparison
+batch_size = 10                   # mini-batch size for the epoch and schedule studies
+decay_epochs = 100                # inverse time decay: the learning rate is halved after decay_epochs epochs
+target_error = 1e-3               # accuracy to reach (relative error to the closed-form solution)
+gammas = { GD = 0.1, momentum = 0.03, adagrad = 1.0, rmsprop = 0.003, adam = 0.03 } # fixed (initial) learning rate per optimizer
+
+[model_selection] # for the final comparison (task i); data from [cv], Lasso GD settings from [lasso]
+k = 5                                                  # number of folds
+max_degree = 30                                        # OLS and Ridge: degrees 1, ..., max_degree
+lasso_max_degree = 10                                  # Lasso: GD does not converge within max_iter above this (condition number)
+ridge_lambda_log = { start = -10, stop = 2, num = 13 } # log10 of lambda values for Ridge
+lasso_lambda_log = { start = -4, stop = 2, num = 7 }   # log10 of lambda values for Lasso
+bias_variance_degrees = [10, 25]                       # degrees for the bias-variance comparison
+n_bootstrap = 50                                       # bootstrap samples for the bias-variance comparison

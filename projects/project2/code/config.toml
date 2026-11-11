@@ -1,0 +1,90 @@
+# config.toml
+
+[data] #  for all tasks
+seed = 67              # random seed
+n_points = 500         # standard number of points in the interval
+sigma = 0.1            # std for noise of data
+x_sampling = "uniform" # uniform or linspace
+test_size = 0.2        # proportion of test data
+validation_size = 0.2
+
+
+[parallel]
+n_jobs = 4
+
+
+[training]
+epochs = 1000
+batch_size = 10
+
+[regression] # task b
+n_points = 500
+best_degree = 15 # best degree from project 1 for OLS
+architectures = [[1, 50, 1], [1, 100, 1], [1, 50, 50, 1], [1, 100, 100, 1]]
+optimizers = ["gd", "rmsprop", "adam"]
+learning_rates = [1e-4, 3e-4, 1e-3, 3e-3, 1e-2, 3e-2, 1e-1, 3e-1, 1.0]
+
+
+[activation_study] # task c
+n_points = 500
+activations = ["sigmoid", "relu", "leaky_relu"]
+widths = [10, 50, 100]
+depths = [1, 2, 3, 4]
+optimizer = "adam"        # chosen as it converges fastest and is most stable
+learning_rate = 1e-3    # chosen as it converges for Adam and should converge for all architectures from last task
+
+
+[regularization_study] # task d
+n_points = 500
+best_ridge = [16, 1e-8]   # best [degree, lambda] for ridge from project1
+best_lasso = [10, 1e-4]   # best [degree, lambda] for lasso from project1
+architectures = [[1, 50, 1], [1, 100, 1], [1, 50, 50, 1], [1, 100, 100, 1]]
+learning_rates = [1e-4, 3e-4, 1e-3, 3e-3, 1e-2, 3e-2, 1e-1] # remove the clearly divergent adam runs
+lambdas = [0.0, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 1.0, 3.0, 10.0] # divided by 320 training points for runge
+regularizers = ["l1", "l2"]
+activation = "relu"
+optimizer = "adam"
+
+
+[classification] # task e
+data_path = "mnist.npz"      # download from the URL in the PDF; *.npz is already gitignored
+n_train = 60000           # reduce while debugging (e.g. 10000), max 60000
+epochs = 50
+batch_size = 128
+optimizer = "adam"           # Should be hardcoded, because its the best
+learning_rates = [1e-4, 3e-4, 1e-3, 3e-3, 1e-2, 3e-2]
+lambdas = [0, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 1.0, 10.0] # divided by 60000 training samples (500 for runge)
+regularizers = ["l1", "l2"]
+activations = ["sigmoid", "relu", "leaky_relu"]
+widths = [50, 100]
+depths = [0, 1, 2]
+input_output_layers = [784, 10]  # Input and output
+
+
+[cross_validation]
+dataset = "mnist"       # "mnist"  or "runge" to run CV on MNIST or Runge
+n_folds = 5 # Number of CV folds. Common for both runge and mnist
+
+# Runge only
+n_points = 500
+optimizer = "adam"
+activation = "sigmoid"
+regularizer = "l2"
+architecture = [50]
+learning_rates = [1e-4, 1e-3, 1e-2, 1e-1, 1.0]
+lambdas = [1e-5, 1e-4, 1e-3, 1e-2, 1e-1]
+
+
+[mnist_cv]
+hyperparameters = "select"      # "select" select manual hyperparameters. "load" loads best from classification.npz
+architecture = [784, 100, 10]
+activation = "leaky_relu"
+optimizer = "adam"
+regularizer = "l2"
+learning_rates = [1e-4, 3e-4, 1e-3, 3e-3, 1e-2]       # Adjust to narrow search
+lambdas = [1e-5, 3e-5, 1e-4, 3e-4, 1e-3]       # Adjust to narrow search
+n_train = 60000         # Can be chosen smaller
+
+[torch_comparison]
+gamma = 3e-3
+lmbda = 1e-4

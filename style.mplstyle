@@ -1,0 +1,39 @@
+# Matplotlib style for REVTeX 4.2 "reprint" (two-column): column = 3.40 in, text width = 7.06 in
+font.family:                 serif
+font.serif:                  cmr10
+mathtext.fontset:            cm
+axes.formatter.use_mathtext: True
+axes.unicode_minus:          False
+
+# text sizes match the document: 10 pt body, 9 pt captions
+font.size:                   9
+axes.labelsize:              9
+axes.titlesize:              9
+xtick.labelsize:             8
+ytick.labelsize:             8
+legend.fontsize:             8
+
+# figure size = final size in the report (single column)
+figure.figsize:              3.4, 2.4
+figure.dpi:                  300
+
+# thin lines, to match the small size
+axes.linewidth:              0.6
+lines.linewidth:             1.0
+lines.markersize:            3
+xtick.major.width:           0.6
+ytick.major.width:           0.6
+xtick.minor.width:           0.4
+ytick.minor.width:           0.4
+xtick.major.size:            3.0
+ytick.major.size:           3.0
+xtick.minor.size:            1.5
+ytick.minor.size:            1.5
+grid.linewidth:              0.4
+grid.color:                  b0b0b0
+
+# compact legends
+legend.frameon:              False
+legend.handlelength:         1.6
+legend.columnspacing:        1.2
+legend.labelspacing:         0.3

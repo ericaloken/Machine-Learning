@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data (don't commit large datasets)
+*.csv
+*.npy
+*.npz
+/data/raw/
+!data/raw/.gitkeep
+
+# LaTeX (for the report)
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.bbl
+*.blg
+
+# OS/editor junk
+.DS_Store
+.vscode/
+*.swp
+
+# Model outputs / large files
+*.pkl
+*.h5
+**/figures/*.png
+**/figures/*.pdf
