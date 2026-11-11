@@ -1,6 +1,6 @@
 # FYS-STK4155 - Applied Data Analysis and Machine Learning
 
-This repository contains the work of Victor Berge Johansen, Erica Løken, Casper Johnsen and Adrian Gjersvik Gundersen for the course FYS-STK4155 at the University of Oslo.
+*This repository contains the work of Victor Berge Johansen, Erica Løken, Casper Johnsen and Adrian Gjersvik Gundersen for the course FYS-STK4155 at the University of Oslo.*
 
 ## Contents
 
